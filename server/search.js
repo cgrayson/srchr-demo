@@ -71,7 +71,8 @@ module.exports = function(term) {
           }
         };
 
-        var url = types[type].url.replace('{term}', escape(term));
+        // ensure 'term' is encoded once and only once by decoding & re-encoding
+        var url = types[type].url.replace('{term}', encodeURIComponent(decodeURIComponent(term)));
 
         r(url, handle);
       });
